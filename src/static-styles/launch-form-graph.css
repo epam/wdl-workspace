@@ -1,0 +1,11 @@
+.launch-form-graph-modal .ant-modal-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.launch-form-graph-modal .ant-modal-body {
+  padding: 0;
+  margin: 0 5px;
+  flex: 1;
+}

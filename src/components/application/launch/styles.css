@@ -1,0 +1,155 @@
+.launch-form-container .section {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+.section .header {
+  width: 240px;
+  display: flex;
+  flex-direction: row;
+  padding-top: 3px;
+}
+
+.section .header .icon {
+  margin-top: 2px;
+  width: 30px;
+  font-size: x-large;
+  display: flex;
+  flex-direction: column;
+  color: #666;
+}
+
+.section .header .progress-line {
+  background-color: #aaa;
+  opacity: 0.5;
+  width: 1px;
+  margin-top: 0;
+  margin-bottom: -3px;
+  margin-left: 15px;
+  flex: 1;
+}
+
+.section[data-complete="true"] .header .progress-line {
+  background-color: #1890ff;
+}
+
+.section[data-complete="true"] .header .icon {
+  color: initial;
+}
+
+.section .header .title {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+}
+
+.launch-form-container .section .content {
+  flex: 1;
+  border-left: 1px solid #eee;
+  padding: 5px;
+  position: relative;
+}
+
+.launch-form-container .section:nth-child(even) {
+  background-color: #fafafa;
+}
+
+.launch-form-container .section:last-child .header .progress-line {
+  display: none;
+}
+
+.wdl-editor-container {
+  position: relative;
+  margin-top: 5px;
+  width: 100%;
+  height: 300px;
+}
+
+.wdl-editor-error {
+  border-color: red !important;
+  box-shadow: 0 0 0 2px #f5222d33 !important;
+}
+
+.wdl-editor {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 1px solid #eee;
+  line-height: 1.25;
+  font-size: 10pt;
+}
+
+.script-error-panel div[class="ant-collapse-content-box"] {
+  padding: 0;
+}
+
+.script-error-panel .error-alert {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  padding: 0 5px;
+}
+
+.wdl-input-row {
+  line-height: 36px;
+}
+
+.wdl-input-row:nth-child(even) {
+  background-color: #fff;
+}
+
+.wdl-input-row:nth-child(odd) {
+  background-color: #fafafa;
+}
+
+.wdl-input-row > div {
+  flex: 1;
+  padding-right: 3px;
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+}
+
+.input.error {
+  color: red;
+  font-size: x-small;
+}
+
+.input.error span.error-message {
+  margin: 5px 0;
+  line-height: 1;
+}
+
+.input.error input {
+  width: 100%;
+  border: 1px solid red;
+}
+
+.load-from-url-popover {
+  width: 400px;
+}
+
+.load-from-url-input input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.actions-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.actions .or {
+  margin: 0 5px;
+}
+
+.actions .or:first-child,
+.actions .or:last-child {
+  display: none;
+}

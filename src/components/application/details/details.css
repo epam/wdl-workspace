@@ -1,0 +1,178 @@
+.workflow-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: 0 !important;
+}
+
+.title a,
+.title span,
+.title i {
+  margin-right: 5px;
+  font-size: large;
+}
+
+.task-list .task {
+  line-height: 36px;
+}
+
+.task-list .task.details {
+  line-height: 28px;
+}
+
+.task-list .task:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.task-list .task.selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.task-list .task span,
+.task-list .task i {
+  margin-right: 5px;
+}
+
+.task-list .task span {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.task-list .task span.title {
+  font-weight: bold;
+}
+
+.number {
+  color: #666;
+  padding-left: 5px !important;
+  padding-right: 0 !important;
+}
+
+.logs-table-container {
+  /*
+  height: 100% is not working under Safari, so we should explicitly set position
+   */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-x: hidden;
+}
+
+.logs-table-container.search {
+  top: 40px;
+}
+
+.logs-table {
+  outline: none;
+  overflow-x: hidden;
+}
+
+.log-row {
+  padding-left: 8px;
+}
+
+.log-row:hover {
+  background-color: #444;
+}
+
+.hidden {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  visibility: hidden;
+  padding-left: 8px;
+}
+
+.row-detail-last {
+  margin-bottom: 5px;
+}
+
+.log-content {
+  position: relative;
+  border: 1px solid #cbcbcb;
+  background-color: #222;
+  color: #e8e8e8;
+  font-family: Proggy, Courier, monospace;
+  font-size: 9pt;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.search-container {
+  height: 40px;
+  background-color: white;
+  width: 100%;
+  color: black;
+  z-index: 1;
+}
+
+.search-buttons-container button {
+  margin-left: 5px;
+}
+
+.scroll-to-last-check-box {
+  opacity: 0.5;
+  color: white;
+}
+
+.scroll-to-last-check-box:hover {
+  opacity: 1;
+  z-index: 2;
+}
+
+.inputs,
+.outputs {}
+
+.input-row th,
+.input-row td,
+.output-row th,
+.output-row td {
+  vertical-align: top;
+}
+
+.time-info {
+  line-height: 14px;
+  margin-top: 2px;
+  vertical-align: middle;
+}
+
+.time-info > span {
+  padding-left: 20px;
+  font-size: smaller;
+  vertical-align: middle;
+}
+
+.split-panel {
+  flex: 1;
+  min-height: 75vh;
+  margin-top: 5px;
+}
+
+.workflow-options-code {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 5px;
+  background-color: #fafafa;
+  margin: 0;
+}
+
+.search-results-default {
+  background-color: #877616;
+}
+
+.search-results-active {
+  background-color: #dbbf24;
+}
+
+.error {
+  color: #ff4632;
+}
+
+.warning {
+  color: #ffa93a;
+}

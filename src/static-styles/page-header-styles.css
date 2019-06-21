@@ -1,0 +1,24 @@
+.workflow-submissions-header .ant-page-header-footer {
+  padding-top: 0;
+}
+
+.workflow-details-header {
+  padding: 15px;
+  height: 100vh;
+}
+
+.workflow-details-header .ant-page-header-content-view {
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.launch-form-header {
+  position: relative;
+  width: 100%;
+}
+
+.launch-form-header .ant-page-header-content-view {
+  position: relative;
+  width: 100%;
+}
