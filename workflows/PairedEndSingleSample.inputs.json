@@ -1,0 +1,38 @@
+{
+  "PairedEndSingleSample.base_file_name": "",
+  "PairedEndSingleSample.break_bands_at_multiples_of": "",
+  "PairedEndSingleSample.bwa_commandline": "bwa mem -K 100000000 -p -v 3 -t 16 -Y $bash_ref_fasta",
+  "PairedEndSingleSample.compression_level": 2,
+  "PairedEndSingleSample.contamination_sites_bed": "",
+  "PairedEndSingleSample.contamination_sites_mu": "",
+  "PairedEndSingleSample.contamination_sites_ud": "",
+  "PairedEndSingleSample.dbSNP_vcf": "",
+  "PairedEndSingleSample.dbSNP_vcf_index": "",
+  "PairedEndSingleSample.final_gvcf_base_name": "",
+  "PairedEndSingleSample.fingerprint_genotypes_file": "",
+  "PairedEndSingleSample.fingerprint_genotypes_index": "",
+  "PairedEndSingleSample.flowcell_unmapped_bams": [
+  ],
+  "PairedEndSingleSample.haplotype_scatter_count": "",
+  "PairedEndSingleSample.known_indels_sites_VCFs": [
+  ],
+  "PairedEndSingleSample.known_indels_sites_indices": [
+  ],
+  "PairedEndSingleSample.max_chimerism_in_reasonable_sample": 0.15,
+  "PairedEndSingleSample.max_duplication_in_reasonable_sample": 0.3,
+  "PairedEndSingleSample.ref_alt": "",
+  "PairedEndSingleSample.ref_amb": "",
+  "PairedEndSingleSample.ref_ann": "",
+  "PairedEndSingleSample.ref_bwt": "",
+  "PairedEndSingleSample.ref_dict": "",
+  "PairedEndSingleSample.ref_fasta": "",
+  "PairedEndSingleSample.ref_fasta_index": "",
+  "PairedEndSingleSample.ref_pac": "",
+  "PairedEndSingleSample.ref_sa": "",
+  "PairedEndSingleSample.sample_name": "",
+  "PairedEndSingleSample.unmapped_bam_suffix": ".bam",
+  "PairedEndSingleSample.wgs_calling_interval_list": "",
+  "PairedEndSingleSample.wgs_coverage_interval_list": "",
+  "PairedEndSingleSample.wgs_evaluation_interval_list": ""
+}
+

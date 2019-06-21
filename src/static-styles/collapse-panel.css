@@ -1,0 +1,27 @@
+.workflow-failures {
+  background-color: transparent;
+}
+
+.workflow-failures .ant-collapse-item {
+  border: none;
+}
+
+.workflow-assets .ant-collapse-header {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  padding-left: 30px !important;
+}
+
+.workflow-failures .ant-collapse-header {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 15px !important;
+}
+
+.workflow-assets .ant-collapse-header i.ant-collapse-arrow {
+  left: 15px !important;
+}
+
+.workflow-failures .ant-collapse-header i.ant-collapse-arrow {
+  left: 0 !important;
+}

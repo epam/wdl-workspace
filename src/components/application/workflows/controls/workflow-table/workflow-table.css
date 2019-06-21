@@ -1,0 +1,101 @@
+.link-action {
+  text-transform: uppercase;
+}
+
+.main-info {
+  font-weight: bold;
+}
+
+.filter-popover-container {
+  background-color: white;
+  padding: 5px;
+  border-radius: 4px;
+  min-width: 100px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+}
+
+.date-picker {
+  outline: none;
+}
+
+.filter-actions-buttons-container {
+  margin: 5px 10px;
+}
+
+.run-row-status-expand {
+  min-width: 60px;
+}
+
+.row-status {
+  width: 30px;
+}
+
+td.row-status-expand,
+td.row-status,
+td.row-name,
+td.row-actions,
+td.row-pipeline,
+td.row-version,
+td.row-docker-image,
+td.row-started,
+td.row-completed,
+td.row-elapsed-time,
+td.row-owner,
+td.row-links,
+td.row-price,
+td.row {
+  cursor: pointer;
+  padding: 4px 8px !important;
+}
+
+td.row-actions button {
+  margin-right: 5px;
+}
+
+@media (min-width: 1300px) {
+  .row-status-expand,
+  .row-status,
+  .row-name,
+  .row-row-actions,
+  .row-pipeline,
+  .row-version,
+  .row-started,
+  .row-completed,
+  .row-elapsed-time,
+  .row-owner,
+  .row-links,
+  .row-price,
+  .row {
+    word-break: normal !important;
+  }
+
+  .row,
+  .row-name {
+    white-space: nowrap;
+  }
+}
+
+.run {
+
+}
+
+.item-actions-container button {
+  margin-left: 5px;
+}
+
+.service-url-run {
+  background-color: lightyellow;
+}
+
+.table > div > div {
+  filter: none !important;
+}
+
+.table th {
+  white-space: nowrap;
+  border-right: 1px solid #eee;
+}
+
+.table th:last-child {
+  border-right: none;
+}
