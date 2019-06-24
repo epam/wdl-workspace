@@ -1,0 +1,8 @@
+language: javascript
+os: linux
+dist: xenial
+services: docker
+script:
+  - ./scripts/travis/build.sh
+after_success:
+  - ./scripts/travis/deploy.sh

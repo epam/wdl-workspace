@@ -1,16 +1,12 @@
-FROM  ubuntu:18.04 AS WDL_WORKSPACE_BUILD
+FROM  node:lts-alpine AS WDL_WORKSPACE_BUILD
 
 ARG   WDL_WORKSPACE_INSTALL_ROOT="/opt/wdl-workspace"
 
 WORKDIR $WDL_WORKSPACE_INSTALL_ROOT
 
-RUN   apt update && \
-      apt install -y nodejs npm
+ENV   PUBLIC_URL="/"
 
-ENV   PUBLIC_URL="/" \
-      VERSION="1.0"
-
-COPY  . wdl-workspace
+COPY  ./ $WDL_WORKSPACE_INSTALL_ROOT/wdl-workspace/
 
 ENV   WW_CROMWELL_API="api" \
       WW_CROMWELL_EXECUTIONS_URL="executions" \
@@ -20,7 +16,7 @@ RUN   cd wdl-workspace && \
       npm install && \
       npm run build
 
-FROM  ubuntu:18.04
+FROM  openjdk:8-jre
 
 ARG   WDL_WORKSPACE_INSTALL_ROOT="/opt/wdl-workspace"
 
@@ -36,9 +32,9 @@ COPY --from=WDL_WORKSPACE_BUILD $WDL_WORKSPACE_INSTALL_ROOT/wdl-workspace/build 
 COPY  ./docker/ /tmp/wdl-workspace/
 
 RUN   apt update && \
-      apt install -y nginx wget openjdk-8-jdk
+      apt install -y nginx wget
 
-RUN   wget "https://github.com/broadinstitute/cromwell/releases/download/41/cromwell-41.jar" -O cromwell.jar
+RUN   wget -q "https://github.com/broadinstitute/cromwell/releases/download/41/cromwell-41.jar" -O cromwell.jar
 
 RUN   sed -e "s,WDL_WORKSPACE_INSTALL_ROOT,$WDL_WORKSPACE_INSTALL_ROOT," \
       /tmp/wdl-workspace/wdl-workspace.nginx.conf >> /etc/nginx/sites-available/wdl-workspace && \

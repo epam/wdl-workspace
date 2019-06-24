@@ -104,7 +104,8 @@
     "lint": "eslint src",
     "lint:fix": "npm run lint -- --fix",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "version": " echo $npm_package_version"
   },
   "browserslist": {
     "production": [
