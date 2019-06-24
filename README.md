@@ -1,5 +1,7 @@
 # WDL WORKSPACE
 
+[![Build Status](https://travis-ci.org/epam/wdl-workspace.svg?branch=develop)](https://travis-ci.org/epam/wdl-workspace)
+
 `WDL Workspace` solution provides a Web-based User Interface for [Cromwell](https://github.com/broadinstitute/cromwell) server.
 - **Launch wdl script**: upload, select from library or edit wdl script, inputs and options
 - **Workflow execution process**: observe workflow's status, inputs, outputs, logs etc
