@@ -69,7 +69,9 @@ class Details extends React.Component {
       case ACTION_RELEASE_ON_HOLD_KEY:
         if (!info.navigated) {
           const {workflow} = this.props;
-          workflow.fetch();
+          if (workflow && workflow.reload) {
+            workflow.reload();
+          }
         }
         break;
       case ACTION_VIEW_MODE_KEY:
