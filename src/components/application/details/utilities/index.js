@@ -10,5 +10,3 @@ export function reloadWorkflow(WrappedComponent) {
 }
 
 export {reload};
-export {default as getTaskJobId} from './get-task-job-id';
-export {default as taskIsSelectedFn} from './task-selection-state';

@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {observer} from 'mobx-react';
-import {computed} from 'mobx';
 import dateFns from 'date-fns';
 import TaskList from './task-list';
 import TaskGraph from './task-graph';
 import Logs from '../logs';
+import getScatterExecutionStatus from './task-list/get-scatter-execution-status';
 import {SplitPanel} from '../../../../utilities';
 import styles from '../../details.css';
-import {getTaskJobId, taskIsSelectedFn} from '../../utilities';
 
 @observer
 export default class Tasks extends React.Component {
@@ -31,7 +30,21 @@ export default class Tasks extends React.Component {
     mode: 'plain',
   };
 
-  @computed
+  state = {
+    expandedKeys: [],
+  };
+
+  onExpandCollapse = (key) => {
+    const {expandedKeys} = this.state;
+    const index = expandedKeys.indexOf(key);
+    if (index === -1) {
+      expandedKeys.push(key);
+    } else if (index >= 0) {
+      expandedKeys.splice(index, 1);
+    }
+    this.setState({expandedKeys});
+  };
+
   get tasks() {
     const {
       from,
@@ -39,26 +52,58 @@ export default class Tasks extends React.Component {
       mode,
       workflow,
     } = this.props;
+    const {expandedKeys} = this.state;
     if (workflow?.metadata?.loaded && workflow.metadata.value.calls) {
       const {calls} = workflow.metadata.value;
-      return Object.keys(calls).map(key => ({
-        name: key,
-        jobs: calls[key],
-      })).reduce((result, current) => {
-        result.push(...current.jobs.map((job, index, arr) => ({
-          jobId: arr.length === 1 ? current.name : `${current.name}.${index}`,
-          rawJobId: arr.length === 1 ? current.name : `${current.name}.${index}`,
-          ...job,
-          name: current.name,
-        })));
-        return result;
-      }, [])
-        .sort((a, b) => dateFns.compareAsc(new Date(a.start), new Date(b.start)))
-        .map((task, index, array) => ({
-          ...task,
-          selected: taskIsSelectedFn({jobId})(task, index, array),
-          url: `/run/${workflow.id}/${mode}/${getTaskJobId(task)}${from ? `?from=${from}` : ''}`,
-        }));
+      const result = Object.keys(calls).map(key => {
+        const jobs = calls[key] || [];
+        if (jobs.length === 1) {
+          const job = jobs[0];
+          return {
+            jobId: key,
+            ...job,
+            name: key,
+            selected: `${key}` === jobId,
+            url: `/run/${workflow.id}/${mode}/${key}${from ? `?from=${from}` : ''}`,
+          };
+        }
+        if (jobs.length > 1) {
+          const start = jobs
+            .map(j => j.start)
+            .sort((a, b) => dateFns.compareAsc(new Date(a), new Date(b)))
+            .shift();
+          const end = jobs
+            .map(j => j.end)
+            .sort((a, b) => dateFns.compareDesc(new Date(a), new Date(b)))
+            .shift();
+          return {
+            end,
+            executionStatus: getScatterExecutionStatus(jobs),
+            expanded: expandedKeys.indexOf(key) >= 0,
+            jobId: key,
+            jobs: jobs
+              .slice()
+              .sort((a, b) => dateFns.compareAsc(new Date(a.start), new Date(b.start)))
+              .map((job, index) => ({
+                ...job,
+                jobId: `${key}.${index}`,
+                name: `Call #${index + 1}`,
+                selected: `${key}.${index}` === jobId,
+                url: `/run/${workflow.id}/${mode}/${key}.${index}${from ? `?from=${from}` : ''}`,
+              })),
+            name: key,
+            scatter: true,
+            start,
+          };
+        }
+        return null;
+      })
+        .filter(Boolean)
+        .sort((a, b) => dateFns.compareAsc(new Date(a.start), new Date(b.start)));
+      if (!jobId && result.length > 0) {
+        result[0].selected = true;
+      }
+      return result;
     }
     return [];
   }
@@ -84,6 +129,7 @@ export default class Tasks extends React.Component {
           key="Tasks"
           details={details}
           tasks={this.tasks}
+          onExpandCollapse={this.onExpandCollapse}
           workflow={workflow}
         />
       );

@@ -18,6 +18,31 @@
   line-height: 36px;
 }
 
+.task-list .scatter {
+  cursor: pointer;
+}
+
+.task-list .scatter .expand-icon {
+  -webkit-transition: transform 500ms;
+  -moz-transition: transform 500ms;
+  -ms-transition: transform 500ms;
+  -o-transition: transform 500ms;
+  transition: transform 500ms;
+  color: #999;
+}
+
+.task-list .scatter.expanded .expand-icon {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.task-list .task.scatter-call {
+  padding-left: 20px;
+}
+
 .task-list .task.details {
   line-height: 28px;
 }
@@ -28,6 +53,10 @@
 
 .task-list .task.selected {
   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.task-list .scatter.expanded.selected {
+  background-color: initial;
 }
 
 .task-list .task span,

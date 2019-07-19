@@ -12,7 +12,11 @@ export default function (
   if (!workflow?.loaded || !tasks) {
     return null;
   }
-  const [selected] = tasks.filter(t => t.selected);
+  const [selected] = tasks
+    // eslint-disable-next-line
+    .map((task) => task.scatter ? task.jobs : [task])
+    .reduce((array, jobs) => ([...array, ...jobs]), [])
+    .filter(t => t.selected);
   if (!selected) {
     return null;
   }
