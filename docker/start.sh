@@ -6,7 +6,9 @@ CROMWELL_API=$(grep -oP '"api":[ ]*"\K([^"]*)(?=")' $WDL_WORKSPACE_ROOT/ui/route
 PATH_MASK=$(grep -oP '"path_mask":[ ]*"\K([^"]*)(?=")' $WDL_WORKSPACE_ROOT/ui/routes.json)
 EXECUTIONS_URL=$(grep -oP '"url":[ ]*"\K([^"]*)(?=")' $WDL_WORKSPACE_ROOT/ui/routes.json)
 WORKFLOWS_URL=$(grep -oP '"listing_url":[ ]*"\K([^"]*)(?=")' $WDL_WORKSPACE_ROOT/ui/routes.json)
+CROMWELL_CONFIG_FILE=$WDL_WORKSPACE_ROOT/cromwell.config
 REBUILD_ROUTES_JSON=0
+BUILD_CONFIG=1
 for i in "$@"
 do
 case $i in
@@ -28,6 +30,11 @@ case $i in
     -w=*|--workflows=*)
     WORKFLOWS_URL="${i#*=}"
     REBUILD_ROUTES_JSON=1
+    shift
+    ;;
+    -c=*|--config=*)
+    CROMWELL_CONFIG_FILE="${i#*=}"
+    BUILD_CONFIG=0
     shift
     ;;
     --help)
@@ -52,24 +59,26 @@ fi
 echo "Starting nginx..."
 nginx
 
-echo "Starting cromwell server..."
-echo "backend {
-  default = \"Local\"
-  providers {
-    Local {
-      config {
-        root: \"$WDL_WORKSPACE_ROOT/cromwell-executions\"
-        dockerRoot: \"$WDL_WORKSPACE_ROOT/cromwell-executions\"
+if (( $BUILD_CONFIG )); then
+  echo "backend {
+    default = \"Local\"
+    providers {
+      Local {
+        config {
+          root: \"$WDL_WORKSPACE_ROOT/cromwell-executions\"
+          dockerRoot: \"$WDL_WORKSPACE_ROOT/cromwell-executions\"
+        }
       }
     }
   }
-}
-workflow-options {
-  workflow-log-dir = \"$WDL_WORKSPACE_ROOT/cromwell-executions\"
-  workflow-log-temporary = false
-}" > $WDL_WORKSPACE_ROOT/cromwell.config
+  workflow-options {
+    workflow-log-dir = \"$WDL_WORKSPACE_ROOT/cromwell-executions\"
+    workflow-log-temporary = false
+  }" > "$CROMWELL_CONFIG_FILE"
+fi
+echo "Starting cromwell server with config file $CROMWELL_CONFIG_FILE..."
 CROMWELL_LOG_FILE="${CROMWELL_LOG_FILE:-/var/log/cromwell.log}"
 touch "$CROMWELL_LOG_FILE"
-nohup java -Dconfig.file=$WDL_WORKSPACE_ROOT/cromwell.config -jar $WDL_WORKSPACE_ROOT/cromwell.jar server > "$CROMWELL_LOG_FILE" 2>&1 &
+nohup java -Dconfig.file="$CROMWELL_CONFIG_FILE" -jar $WDL_WORKSPACE_ROOT/cromwell.jar server > "$CROMWELL_LOG_FILE" 2>&1 &
 
 tail -f "$CROMWELL_LOG_FILE"
