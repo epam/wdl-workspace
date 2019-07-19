@@ -63,6 +63,13 @@ export default class Tasks extends React.Component {
     return [];
   }
 
+  onInitializeTaskGraph = (graph) => {
+    this.graph = graph;
+    if (this.graph) {
+      this.graph.draw();
+    }
+  };
+
   renderTasks = () => {
     const {
       details,
@@ -84,6 +91,7 @@ export default class Tasks extends React.Component {
     return (
       <TaskGraph
         key="Tasks"
+        onInitialized={this.onInitializeTaskGraph}
         rootUrl={rootUrl}
         history={history}
         tasks={this.tasks}

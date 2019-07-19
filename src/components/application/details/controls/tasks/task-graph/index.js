@@ -6,6 +6,7 @@ export default class TaskGraph extends React.Component {
   static propTypes = {
     // eslint-disable-next-line
     history: PropTypes.object.isRequired,
+    onInitialized: PropTypes.func,
     rootUrl: PropTypes.string.isRequired,
     // eslint-disable-next-line
     tasks: PropTypes.array,
@@ -14,6 +15,7 @@ export default class TaskGraph extends React.Component {
   };
 
   static defaultProps = {
+    onInitialized: null,
     tasks: [],
   };
 
@@ -63,6 +65,10 @@ export default class TaskGraph extends React.Component {
     if (graph) {
       this.graph = graph;
       this.graph.updateData();
+      const {onInitialized} = this.props;
+      if (onInitialized) {
+        onInitialized(this.graph);
+      }
     }
   };
 
